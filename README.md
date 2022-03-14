@@ -1,6 +1,6 @@
 # The Temelpa Take-Home Assignment
 
-Please create a private fork of this repo, complete the steps, and once you
+Please create a private version of this repo, complete the objectives, and once you
 are finished, send a link to your repo to us.
 
 # The Assignment
@@ -14,7 +14,7 @@ if you want to radically refactor the code go right ahead.
 The following are the objectives you'll need to complete to finish the
 take-home.
 
-### Step 1: Finish The Implementation
+### Objective 1: Finish The Implementation
 
 The repo starts you off with implmentations of the individual components without
 implementing global state management. Additionally, there may or may not be
@@ -31,7 +31,7 @@ Once you're done, the implementation should behave exactly the same way as the o
 TodoMVC implementations you've seen with the addition that state is persisted through
 the backend.
 
-### Step 2: Add Search Functionality
+### Objective 2: Add Search Functionality
 
 Remove the downward chevron '⌄' with and replace it with a button that toggles
 search mode. In search mode, rather the main input field is used to filter
@@ -45,13 +45,13 @@ You should change the visual elements accordingly so that a user who has never
 used this app can intuitively understand how to use it. For starters, the input
 field shouldn't say "What Needs To Be Done" when empty in search mode.
 
-### Step 3: Add Keyboard Shortcuts
+### Objective 3: Add Keyboard Shortcuts
 
 Add the following keyboard shortcuts into the implementation:
 
 1. Users can press `/` to open search mode and begin searching.
 2. Users can press `n` to open input mode and begin writing a new todo.
-3. Users can press the up arrow, or down arrow key to select and step through the
+3. Users can press the up arrow, or down arrow key to select and objective through the
    currently visible todos in the todolist. Inside a selected todo:
 
 - Users can press space to toggle if the todo is completed or active
@@ -63,12 +63,12 @@ Add the following keyboard shortcuts into the implementation:
 4. As much as possible, pressing `Esc` should do something intuitive -- I.E. undo, remove.
 5. As much as possible, pressing `Enter` should do something intuitive -- I.E. insert, complete.
 
-Like in step 2, you should change the visual elements accordingly so that a novice user
+Like in objective 2, you should change the visual elements accordingly so that a novice user
 can understand how these features work. Take a look at
 [this blog post](https://knock.app/blog/how-to-design-great-keyboard-shortcuts)
 if you want some ideas on how to visually show keyboard shortcuts.
 
-### Step 4: Undo/Redo
+### Objective 4: Undo/Redo
 
 Add two buttons at the footer to allow the user to undo or redo any change the user has made. `Ctrl + z`
 and `Ctrl + Shift + z` should also undo and redo.
@@ -77,7 +77,7 @@ and `Ctrl + Shift + z` should also undo and redo.
 
 We expect you to work as if this task was a normal project at work. So please write
 your code in a way that fits your intuitive notion of operating within best practices.
-Additionally, you should at the very least have a different commmit for each individual step,
+ydditionally, you should at the very least have a different commmit for each individual objective,
 Ideally, more as you go through process of completing the take-home. Also we like
 to see your thought process and fixes as you make changes. So don't be afraid of
 committing code that you later edit. No need to squash those commits.
