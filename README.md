@@ -31,7 +31,11 @@ Once you're done, the implementation should behave exactly the same way as the o
 TodoMVC implementations you've seen with the addition that state is persisted through
 the backend.
 
-### Objective 2: Add Search Functionality
+### Objective 2: Search Or Keyboard Shortcuts
+
+For objective 1, you have two different options of what to implement:
+
+#### Option 1: Add Search Functionality
 
 Remove the downward chevron '⌄' with and replace it with a button that toggles
 search mode. In search mode, rather the main input field is used to filter
@@ -45,7 +49,7 @@ You should change the visual elements accordingly so that a user who has never
 used this app can intuitively understand how to use it. For starters, the input
 field shouldn't say "What Needs To Be Done" when empty in search mode.
 
-### Objective 3: Add Keyboard Shortcuts
+#### Option 2: Add Keyboard Shortcuts
 
 Add the following keyboard shortcuts into the implementation:
 
@@ -63,12 +67,12 @@ Add the following keyboard shortcuts into the implementation:
 4. As much as possible, pressing `Esc` should do something intuitive -- I.E. undo, remove.
 5. As much as possible, pressing `Enter` should do something intuitive -- I.E. insert, complete.
 
-Like in objective 2, you should change the visual elements accordingly so that a novice user
+Like in option 1, you should change the visual elements accordingly so that a novice user
 can understand how these features work. Take a look at
 [this blog post](https://knock.app/blog/how-to-design-great-keyboard-shortcuts)
 if you want some ideas on how to visually show keyboard shortcuts.
 
-### Objective 4: Undo/Redo
+### Objective 3: Undo/Redo
 
 Add two buttons at the footer to allow the user to undo or redo any change the user has made. `Ctrl + z`
 and `Ctrl + Shift + z` should also undo and redo.
