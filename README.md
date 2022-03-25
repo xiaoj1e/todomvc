@@ -23,10 +23,6 @@ need to modify the components. Your goal is to finish the TodoMVC implementation
 you may look at existing implementations (of course excluding their source code)
 to see what you'll need to do.
 
-As part of the implementations you'll need to retrieve and set the state of the
-todo list from the backend api. Take a look at `src/pages/api/index.ts` to see how
-the API is constructed.
-
 Once you're done, the implementation should behave exactly the same way as the other
 TodoMVC implementations you've seen with the addition that state is persisted through
 the backend.
@@ -49,12 +45,8 @@ field shouldn't say "What Needs To Be Done" when empty in search mode.
 
 Add two buttons at the footer to allow the user to undo or redo any change the user has made. 
 
-### Hints
-
-- You shouldn't have to change anything about `src/pages/api/index.ts` to make this work. 
-- You should be able to complete this assignment without importing any additional dependencies.
-
 ## Assumptions
+You should be able to complete this assignment without importing any additional dependencies.
 
 We expect you to work as if this task was a normal project at work. So please write
 your code in a way that fits your intuitive notion of operating within best practices.
