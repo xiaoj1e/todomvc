@@ -31,11 +31,7 @@ Once you're done, the implementation should behave exactly the same way as the o
 TodoMVC implementations you've seen with the addition that state is persisted through
 the backend.
 
-### Objective 2: Search Or Keyboard Shortcuts
-
-For objective 1, you have two different options of what to implement:
-
-#### Option 1: Add Search Functionality
+### Objective 2: Search
 
 Remove the downward chevron '⌄' with and replace it with a button that toggles
 search mode. In search mode, rather the main input field is used to filter
@@ -49,33 +45,14 @@ You should change the visual elements accordingly so that a user who has never
 used this app can intuitively understand how to use it. For starters, the input
 field shouldn't say "What Needs To Be Done" when empty in search mode.
 
-#### Option 2: Add Keyboard Shortcuts
-
-Add the following keyboard shortcuts into the implementation:
-
-1. Users can press `/` to open search mode and begin searching.
-2. Users can press `n` to open input mode and begin writing a new todo.
-3. Users can press the up arrow, or down arrow key to select and objective through the
-   currently visible todos in the todolist. Inside a selected todo:
-
-- Users can press space to toggle if the todo is completed or active
-- While selected, the todo should not be filtered invisible even if the user
-  changes the status, only after deselecting the todo should the filter
-  take affect.
-- Users can press enter to toggle edit mode and change the todo's title
-
-4. As much as possible, pressing `Esc` should do something intuitive -- I.E. undo, remove.
-5. As much as possible, pressing `Enter` should do something intuitive -- I.E. insert, complete.
-
-Like in option 1, you should change the visual elements accordingly so that a novice user
-can understand how these features work. Take a look at
-[this blog post](https://knock.app/blog/how-to-design-great-keyboard-shortcuts)
-if you want some ideas on how to visually show keyboard shortcuts.
-
 ### Objective 3: Undo/Redo
 
-Add two buttons at the footer to allow the user to undo or redo any change the user has made. `Ctrl + z`
-and `Ctrl + Shift + z` should also undo and redo.
+Add two buttons at the footer to allow the user to undo or redo any change the user has made. 
+
+### Hints
+
+- You shouldn't have to change anything about `src/pages/api/index.ts` to make this work. 
+- You should be able to complete this assignment without importing any additional dependencies.
 
 ## Assumptions
 
