@@ -1,7 +1,7 @@
 # The Temelpa Take-Home Assignment
 
 Please create a private version of this repo, complete the objectives, and once you
-are finished, send a link to your repo to us.
+are finished, send a zip of your repo to us.
 
 # The Assignment
 
@@ -24,28 +24,23 @@ you may look at existing implementations (of course excluding their source code)
 to see what you'll need to do.
 
 Once you're done, the implementation should behave exactly the same way as the other
-TodoMVC implementations you've seen with the addition that state is persisted through
-the backend.
+TodoMVC implementations you've seen.
 
-### Objective 2: Search
+### Objective 2: Undo/Redo
 
-Remove the downward chevron '⌄' with and replace it with a button that toggles
-search mode. In search mode, rather the main input field is used to filter
-through each todo by title (instead of creating new todos).
+Add two buttons at the footer to allow the user to undo or redo any change the user has made.
 
-The specific matching algorithm is up to you, whether you use prefix matching,
-substring matching, or some other way of identifying if a todo and search
-term matches.
+## Turning In A Solution
 
-You should change the visual elements accordingly so that a user who has never
-used this app can intuitively understand how to use it. For starters, the input
-field shouldn't say "What Needs To Be Done" when empty in search mode.
+Prior to turning in your solution, create a change-log that outlines each commit. 
+we'll likely ask you to go over some of your thinking and design choices later so it'll be
+helpful for you to collect some of that in writing as you complete the assignment.
 
-### Objective 3: Undo/Redo
-
-Add two buttons at the footer to allow the user to undo or redo any change the user has made. 
+Once you're done, just send us an email of your solution zipped. Remember to remove `node_modules/` 
+and `.next/` before creating the zip. 
 
 ## Assumptions
+
 You should be able to complete this assignment without importing any additional dependencies.
 
 We expect you to work as if this task was a normal project at work. So please write
