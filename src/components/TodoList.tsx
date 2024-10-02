@@ -2,8 +2,9 @@ import TodoItem from "./TodoItem";
 import { Todo } from "src/models/todo";
 import React, { useCallback } from "react";
 
-type Props = {
+type ListProps = {
     todos: Todo[];
+    editingId: number;
     onEdit: (id: number) => void;
     onDelete: (id: number) => void;
     onToggleComplete: (id: number) => void;
@@ -12,20 +13,23 @@ type Props = {
 
 export default function TodoList({
     todos,
+    editingId,
     onEdit,
     onDelete,
     onToggleComplete,
     onSetTitle,
-}: Props) {
+}: ListProps) {
     const Item = useCallback(
         ({ todo }: { todo: Todo }) => {
             return (
                 <TodoItem
                     todo={todo}
+                    id={editingId}
+                    editing={editingId === todo.id}
                     onEdit={() => onEdit(todo.id)}
                     onToggleComplete={() => onToggleComplete(todo.id)}
                     onDelete={() => onDelete(todo.id)}
-                    onSetTitle={(title) => onSetTitle(todo.id, title)}
+                    onSetTitle={onSetTitle}
                 />
             );
         },

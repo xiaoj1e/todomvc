@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-interface Props {
+interface EditProps {
     title: string;
     editing: boolean;
-    onSetTitle: (title: string) => void;
+    id: number;
+    onSetTitle: (id: number, title: string) => void;
 }
 
-export default function InputEdit({ title, editing, onSetTitle }: Props) {
+export default function InputEdit({ title, editing, id, onSetTitle }: EditProps) {
     // local title for editing
     const [localTitle, setLocalTitle] = useState(title);
     // if the prop changes set the local title to it
@@ -17,7 +18,7 @@ export default function InputEdit({ title, editing, onSetTitle }: Props) {
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const onCommitTitle = useCallback(() => {
-        onSetTitle(localTitle);
+        onSetTitle(id, localTitle);
     }, [onSetTitle, localTitle]);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -3,34 +3,38 @@ import { Todo } from "src/models/todo";
 
 import InputEdit from "./InputEdit";
 
-interface Props {
+interface TodoItemProps {
     todo: Todo;
-    onEdit: () => void;
+    editing: boolean;
+    id: number,
+    onEdit: (id: number) => void;
     onDelete: () => void;
     onToggleComplete: () => void;
-    onSetTitle: (title: string) => void;
+    onSetTitle: (id: number, title: string) => void;
 }
 
 export default function TodoItem({
     todo,
+    editing,
+    id,
     onEdit,
     onDelete,
     onToggleComplete,
     onSetTitle,
-}: Props) {
+}: TodoItemProps) {
     const onChangeCheckbox = (_: React.ChangeEvent<HTMLInputElement>) => {
         onToggleComplete();
     };
 
     const onDoubleClickLabel = (_: React.MouseEvent<HTMLLabelElement>) => {
-        onEdit();
+        onEdit(todo.id);
     };
 
     return (
         <li
             key={todo.id}
             className={clsx({
-                editing: todo.editing,
+                editing: editing,
                 completed: todo.completed,
             })}
         >
@@ -46,7 +50,8 @@ export default function TodoItem({
             </div>
             <InputEdit
                 title={todo.title}
-                editing={todo.editing}
+                editing={editing}
+                id={id}
                 onSetTitle={onSetTitle}
             />
         </li>

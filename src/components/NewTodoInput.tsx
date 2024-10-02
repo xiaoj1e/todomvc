@@ -25,6 +25,7 @@ export default function NewTodoInput({ onNewTodo }: Props) {
             ref={inputRef}
             placeholder="What needs to be done?"
             onKeyPress={onKeyPress}
+            autoFocus={true}
         />
     );
 }
