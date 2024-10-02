@@ -12,21 +12,15 @@ const newID = (() => {
     return () => id++;
   })();
 
-const firstEntry : Todo = {
-    id: 0,
-    title: "",
-    completed: false
-};
-
 export default function Home() {
     const [todos, setTodos] = useState<Todo[]>([]);
-    const [history, setHistory] = useState<Todo[][]>([]);
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const [history, setHistory] = useState<Todo[][]>([[]]); // First entry is blank
+    const [currentIndex, setCurrentIndex] = useState<number>(1);
     const [editingId, setEditingId] = useState<number>(0);
     const [currentFilter, setCurrentFilter] = useState<Filter>(ALL);
 
     const updateTodos = (newTodos: Todo[]) => {
-        if (currentIndex === 0 || JSON.stringify(todos) !== JSON.stringify(newTodos)) {
+        if (JSON.stringify(todos) !== JSON.stringify(newTodos)) {
             const newHistory = [...history.slice(0, currentIndex + 1), newTodos];
             setHistory(newHistory);
             setCurrentIndex(newHistory.length - 1);
@@ -77,9 +71,9 @@ export default function Home() {
 
 
     const undo = () => {
-        if (currentIndex >= 0) {
+        if (currentIndex > 0) {
             setCurrentIndex(currentIndex - 1);
-            currentIndex == 0 ? setTodos([firstEntry]) : setTodos(history[currentIndex - 1]);
+            setTodos(history[currentIndex - 1]);
         }
     };
 

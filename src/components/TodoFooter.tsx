@@ -36,7 +36,7 @@ export default function TodoFooter({
                         <a  
                             onClick={() => setCurrentFilter(ALL)}
                             className={clsx({
-                                selected: filter == ALL,
+                                selected: filter === ALL,
                             })}
                         >
                             All
