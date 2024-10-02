@@ -12,20 +12,37 @@ const newID = (() => {
     return () => id++;
   })();
 
+const firstEntry : Todo = {
+    id: 0,
+    title: "",
+    completed: false
+};
+
 export default function Home() {
     const [todos, setTodos] = useState<Todo[]>([]);
+    const [history, setHistory] = useState<Todo[][]>([]);
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [editingId, setEditingId] = useState<number>(0);
     const [currentFilter, setCurrentFilter] = useState<Filter>(ALL);
 
+    const updateTodos = (newTodos: Todo[]) => {
+        if (currentIndex === 0 || JSON.stringify(todos) !== JSON.stringify(newTodos)) {
+            const newHistory = [...history.slice(0, currentIndex + 1), newTodos];
+            setHistory(newHistory);
+            setCurrentIndex(newHistory.length - 1);
+        }
+        setTodos(newTodos);
+    };
+
     const toggleTodo = (id: number) => {
-        setTodos(todos.map<Todo>((todo : Todo) => 
+        updateTodos(todos.map<Todo>((todo : Todo) => 
             todo.id === id ? { ...todo, completed: !todo.completed } : todo
         ));
         setEditingId(id);
     };
 
     const deleteTodo = (id: number) => {
-        setTodos(todos.filter(todo => todo.id !== id));
+        updateTodos(todos.filter(todo => todo.id !== id));
         setEditingId(id);
     };
 
@@ -40,7 +57,7 @@ export default function Home() {
             completed: false,
         };
 
-        setTodos([...todos, newTodo]);
+        updateTodos([...todos, newTodo]);
         setEditingId(curId);
     };
 
@@ -48,7 +65,7 @@ export default function Home() {
         if (!text.trim()) {
             return;
         }
-        setTodos(todos.map<Todo>((todo : Todo) => 
+        updateTodos(todos.map<Todo>((todo : Todo) => 
             todo.id === id ? { ...todo, title: text.trim() } : todo
         ));
         setEditingId(0);
@@ -57,25 +74,40 @@ export default function Home() {
     const onEdit = (id: number) => {
         setEditingId(id);
     };
-    
+
+
+    const undo = () => {
+        if (currentIndex >= 0) {
+            setCurrentIndex(currentIndex - 1);
+            currentIndex == 0 ? setTodos([firstEntry]) : setTodos(history[currentIndex - 1]);
+        }
+    };
+
+    const redo = () => {
+        if (currentIndex < history.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+            setTodos(history[currentIndex + 1]);
+        }
+    };
+
     const completedCount = useMemo(() => {
-        return todos.reduce((acc, cur) => cur.completed ? ++acc : acc, 0)
+        return todos?.reduce((acc, cur) => cur.completed ? ++acc : acc, 0)
     }, [todos]);
 
     const onClearCompleted = () => {
-        setTodos(todos.filter((todo) => {
+        updateTodos(todos.filter((todo) => {
           return !todo.completed;
         }));
     };
 
     const onMarkAllActive = () => {
         const allCompleted = todos.every(todo => todo.completed);
-        setTodos(todos.map<Todo>((todo : Todo) => ({ ...todo, completed: !allCompleted })));
+        updateTodos(todos.map<Todo>((todo : Todo) => ({ ...todo, completed: !allCompleted })));
     };
 
     const onMarkAllCompleted = () => {
         const allActive = todos.every(todo => todo.completed);
-        setTodos(todos.map<Todo>((todo : Todo) => ({ ...todo, completed: !allActive })));
+        updateTodos(todos.map<Todo>((todo : Todo) => ({ ...todo, completed: !allActive })));
     };
 
     const filteredTodos = todos.filter(todo => {
@@ -88,10 +120,6 @@ export default function Home() {
         return true;
     });
 
-    console.log(todos);
-    console.log(currentFilter);
-
-    
     return (
         <>
             <Head>
@@ -129,6 +157,8 @@ export default function Home() {
                     numActiveTodos={todos.length - completedCount}
                     numTodos={todos.length}
                     onClearCompleted={onClearCompleted}
+                    undo={undo}
+                    redo={redo}
                 />
             </section>
 

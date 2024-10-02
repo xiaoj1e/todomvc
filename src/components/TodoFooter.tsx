@@ -8,6 +8,8 @@ type Props = {
     numActiveTodos: number;
     numTodos: number;
     onClearCompleted: () => void;
+    undo: () => void;
+    redo: () => void;
 };
 
 export default function TodoFooter({
@@ -16,6 +18,8 @@ export default function TodoFooter({
     numActiveTodos,
     numTodos,
     onClearCompleted,
+    undo,
+    redo
 }: Props) {
     if (numTodos == 0) {
         return null;
@@ -66,6 +70,8 @@ export default function TodoFooter({
                     Clear completed
                 </button>
             )}
+            <button className="undo" onClick={() => undo()} /*disabled={currentIndex < 0}*/>Undo</button>
+            <button className="redo" onClick={() => redo()} /*disabled={currentIndex >= history.length - 1}*/>Redo</button>
         </footer>
     );
 }

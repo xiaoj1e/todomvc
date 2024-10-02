@@ -286,6 +286,36 @@ body {
   font-weight: 300;
 }
 
+.undo,
+html .undo:active {
+  text-align: left;
+  left: 22%;
+  float: left;
+  position: absolute;
+  line-height: 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.undo:hover {
+  text-decoration: underline;
+}
+
+.redo,
+html .redo:active {
+  text-align: right;
+  right: 25%;
+  float: right;
+  position: absolute;
+  line-height: 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.redo:hover {
+  text-decoration: underline;
+}
+
 .filters {
   margin: 0;
   padding: 0;
