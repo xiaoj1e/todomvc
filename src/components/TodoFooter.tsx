@@ -1,9 +1,10 @@
 import Link from "next/link";
 import clsx from "clsx";
-import { Filter } from "src/models/filter";
+import { Filter, ACTIVE, COMPLETED, ALL } from "src/models/filter";
 
 type Props = {
     filter: Filter;
+    setCurrentFilter: (filter: Filter) => void;
     numActiveTodos: number;
     numTodos: number;
     onClearCompleted: () => void;
@@ -11,6 +12,7 @@ type Props = {
 
 export default function TodoFooter({
     filter,
+    setCurrentFilter,
     numActiveTodos,
     numTodos,
     onClearCompleted,
@@ -27,9 +29,10 @@ export default function TodoFooter({
             <ul className="filters">
                 <li>
                     <Link href="/#/">
-                        <a
+                        <a  
+                            onClick={() => setCurrentFilter(ALL)}
                             className={clsx({
-                                selected: filter == "all",
+                                selected: filter == ALL,
                             })}
                         >
                             All
@@ -38,7 +41,9 @@ export default function TodoFooter({
                 </li>
                 <li>
                     <Link href="/#/active">
-                        <a className={clsx({ selected: filter === "active" })}>
+                        <a
+                            onClick={() => setCurrentFilter(ACTIVE)}
+                            className={clsx({ selected: filter === ACTIVE })}>
                             Active
                         </a>
                     </Link>
@@ -46,8 +51,9 @@ export default function TodoFooter({
                 <li>
                     <Link href="/#/completed">
                         <a
+                            onClick={() => setCurrentFilter(COMPLETED)}
                             className={clsx({
-                                selected: filter === "completed",
+                                selected: filter === COMPLETED,
                             })}
                         >
                             Completed

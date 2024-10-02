@@ -6,24 +6,22 @@ import InputEdit from "./InputEdit";
 interface TodoItemProps {
     todo: Todo;
     editing: boolean;
-    id: number,
     onEdit: (id: number) => void;
     onDelete: () => void;
-    onToggleComplete: () => void;
+    onToggleComplete: (id: number) => void;
     onSetTitle: (id: number, title: string) => void;
 }
 
 export default function TodoItem({
     todo,
     editing,
-    id,
     onEdit,
     onDelete,
     onToggleComplete,
     onSetTitle,
 }: TodoItemProps) {
     const onChangeCheckbox = (_: React.ChangeEvent<HTMLInputElement>) => {
-        onToggleComplete();
+        onToggleComplete(todo.id);
     };
 
     const onDoubleClickLabel = (_: React.MouseEvent<HTMLLabelElement>) => {
@@ -51,7 +49,7 @@ export default function TodoItem({
             <InputEdit
                 title={todo.title}
                 editing={editing}
-                id={id}
+                id={todo.id}
                 onSetTitle={onSetTitle}
             />
         </li>

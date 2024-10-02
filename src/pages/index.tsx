@@ -1,10 +1,11 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import NewTodoInput from "src/components/NewTodoInput";
 import TodoFooter from "src/components/TodoFooter";
 import TodoList from "src/components/TodoList";
 import TodoMarkAll from "src/components/TodoMarkAll";
 import { Todo } from "src/models/todo";
+import { Filter, ALL, ACTIVE, COMPLETED } from "src/models/filter";
 
 const newID = (() => {
     let id = 1;
@@ -14,10 +15,10 @@ const newID = (() => {
 export default function Home() {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [editingId, setEditingId] = useState<number>(0);
-    const [newTodoText, setNewTodoText] = useState<String>("");
+    const [currentFilter, setCurrentFilter] = useState<Filter>(ALL);
 
     const toggleTodo = (id: number) => {
-        setTodos(todos.map(todo => 
+        setTodos(todos.map<Todo>((todo : Todo) => 
             todo.id === id ? { ...todo, completed: !todo.completed } : todo
         ));
         setEditingId(id);
@@ -44,24 +45,51 @@ export default function Home() {
     };
 
     const editTodo = (id: number, text: string) => {
-        if (!text.trim()) return; // Prevent saving empty edits
-
-        setTodos(todos.map(todo => 
+        if (!text.trim()) {
+            return;
+        }
+        setTodos(todos.map<Todo>((todo : Todo) => 
             todo.id === id ? { ...todo, title: text.trim() } : todo
         ));
-        setEditingId(0); // Clear editing state after editing
+        setEditingId(0);
     };
 
     const onEdit = (id: number) => {
         setEditingId(id);
-        const todoToEdit = todos.find(todo => todo.id === id);
-        if (todoToEdit) {
-            setNewTodoText(todoToEdit.title);
-        }
-        setEditingId(id);
+    };
+    
+    const completedCount = useMemo(() => {
+        return todos.reduce((acc, cur) => cur.completed ? ++acc : acc, 0)
+    }, [todos]);
+
+    const onClearCompleted = () => {
+        setTodos(todos.filter((todo) => {
+          return !todo.completed;
+        }));
     };
 
-    // console.log(todos);
+    const onMarkAllActive = () => {
+        const allCompleted = todos.every(todo => todo.completed);
+        setTodos(todos.map<Todo>((todo : Todo) => ({ ...todo, completed: !allCompleted })));
+    };
+
+    const onMarkAllCompleted = () => {
+        const allActive = todos.every(todo => todo.completed);
+        setTodos(todos.map<Todo>((todo : Todo) => ({ ...todo, completed: !allActive })));
+    };
+
+    const filteredTodos = todos.filter(todo => {
+        if (currentFilter === ACTIVE) {
+            return !todo.completed;
+        }
+        else if (currentFilter === COMPLETED) {
+            return todo.completed;
+        }
+        return true;
+    });
+
+    console.log(todos);
+    console.log(currentFilter);
 
     
     return (
@@ -80,30 +108,27 @@ export default function Home() {
 
                 <section className="main">
                     <TodoMarkAll
-                        numCompletedTodos={0}
+                        numCompletedTodos={completedCount}
                         numTodos={todos.length}
-                        onMarkAllActive={() =>
-                            console.log("onMarkAllActive was called")
-                        }
-                        onMarkAllCompleted={() =>
-                            console.log("onMarkAllCompleted was called")
-                        }
+                        onMarkAllActive={onMarkAllActive}
+                        onMarkAllCompleted={onMarkAllCompleted}
                     />
                     <TodoList
-                        todos={todos}
+                        todos={filteredTodos}
                         editingId={editingId}
                         onEdit={onEdit}
                         onDelete={deleteTodo}
-                        onToggleComplete={() => toggleTodo}
+                        onToggleComplete={(editingId) => toggleTodo(editingId)}
                         onSetTitle={(editingId, title) => editTodo(editingId, title)}
                     />
                 </section>
 
                 <TodoFooter
-                    filter="all"
-                    numActiveTodos={0}
-                    numTodos={0}
-                    onClearCompleted={() => {}}
+                    filter={currentFilter}
+                    setCurrentFilter={setCurrentFilter}
+                    numActiveTodos={todos.length - completedCount}
+                    numTodos={todos.length}
+                    onClearCompleted={onClearCompleted}
                 />
             </section>
 

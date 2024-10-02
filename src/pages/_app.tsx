@@ -1,16 +1,11 @@
 import "../styles/app.css";
 
-export type AppProps = {
-    editing: boolean,
-    id: number
-};
-
-export default function App({
+export default function App<P extends {}>({
     Component,
     pageProps,
 }: {
-    Component: React.ComponentType<AppProps>;
-    pageProps: AppProps;
+    Component: React.ComponentType<P>;
+    pageProps: P;
 }) {
     return <Component {...pageProps} />;
 }

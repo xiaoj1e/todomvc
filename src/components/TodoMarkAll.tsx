@@ -1,4 +1,4 @@
-type Props = {
+type ToggleProps = {
     numCompletedTodos: number;
     numTodos: number;
     onMarkAllActive: () => void;
@@ -10,7 +10,7 @@ export default function TodoMarkAll({
     numTodos,
     onMarkAllActive,
     onMarkAllCompleted,
-}: Props) {
+}: ToggleProps) {
     const allCompleted = numCompletedTodos === numTodos;
 
     const labelText = `Mark all as ${allCompleted ? "active" : "complete"}`;
@@ -30,12 +30,11 @@ export default function TodoMarkAll({
     return (
         <>
             <input
-                readOnly
                 id="toggle-all"
                 className="toggle-all"
                 type="checkbox"
                 checked={allCompleted}
-                onClick={onClick}
+                onChange={onClick}
             />
             <label htmlFor="toggle-all" title={labelText}>
                 {labelText}

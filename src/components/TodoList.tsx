@@ -24,9 +24,8 @@ export default function TodoList({
             return (
                 <TodoItem
                     todo={todo}
-                    id={editingId}
                     editing={editingId === todo.id}
-                    onEdit={() => onEdit(todo.id)}
+                    onEdit={onEdit}
                     onToggleComplete={() => onToggleComplete(todo.id)}
                     onDelete={() => onDelete(todo.id)}
                     onSetTitle={onSetTitle}
