@@ -70,8 +70,8 @@ export default function TodoFooter({
                     Clear completed
                 </button>
             )}
-            <button className="undo" onClick={() => undo()} /*disabled={currentIndex < 0}*/>Undo</button>
-            <button className="redo" onClick={() => redo()} /*disabled={currentIndex >= history.length - 1}*/>Redo</button>
+            <button className="undo" onClick={() => undo()}>Undo</button>
+            <button className="redo" onClick={() => redo()}>Redo</button>
         </footer>
     );
 }

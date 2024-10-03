@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { ENTER_KEY, ESCAPE_KEY } from "src/models/constants";
 
 interface EditProps {
     title: string;
@@ -26,8 +27,8 @@ export default function InputEdit({ title, editing, id, onSetTitle }: EditProps)
     };
 
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        e.key === "Enter" && onCommitTitle();
-        e.key === "Escape" && onCommitTitle();
+        e.key === ENTER_KEY && onCommitTitle();
+        e.key === ESCAPE_KEY && onCommitTitle();
     };
 
     const editingRef = useRef<boolean>(false);

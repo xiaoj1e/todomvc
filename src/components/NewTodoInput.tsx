@@ -9,7 +9,7 @@ export default function NewTodoInput({ onNewTodo }: Props) {
 
     const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
 
-        if (e.key === "Enter" && inputRef.current != null) {
+        if (e.key === "Enter" && inputRef.current !== null) {
             onNewTodo(inputRef.current.value);
             inputRef.current.value = "";
         }

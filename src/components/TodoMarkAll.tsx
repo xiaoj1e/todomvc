@@ -1,26 +1,20 @@
 type ToggleProps = {
     numCompletedTodos: number;
     numTodos: number;
-    onMarkAllActive: () => void;
-    onMarkAllCompleted: () => void;
+    onMarkAll: () => void;
 };
 
 export default function TodoMarkAll({
     numCompletedTodos,
     numTodos,
-    onMarkAllActive,
-    onMarkAllCompleted,
+    onMarkAll,
 }: ToggleProps) {
     const allCompleted = numCompletedTodos === numTodos;
 
     const labelText = `Mark all as ${allCompleted ? "active" : "complete"}`;
 
     const onClick = () => {
-        if (allCompleted) {
-            onMarkAllActive();
-        } else {
-            onMarkAllCompleted();
-        }
+        onMarkAll();
     };
 
     if (numTodos == 0) {

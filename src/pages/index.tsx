@@ -69,7 +69,6 @@ export default function Home() {
         setEditingId(id);
     };
 
-
     const undo = () => {
         if (currentIndex > 0) {
             setCurrentIndex(currentIndex - 1);
@@ -94,14 +93,9 @@ export default function Home() {
         }));
     };
 
-    const onMarkAllActive = () => {
+    const onMarkAll= () => {
         const allCompleted = todos.every(todo => todo.completed);
         updateTodos(todos.map<Todo>((todo : Todo) => ({ ...todo, completed: !allCompleted })));
-    };
-
-    const onMarkAllCompleted = () => {
-        const allActive = todos.every(todo => todo.completed);
-        updateTodos(todos.map<Todo>((todo : Todo) => ({ ...todo, completed: !allActive })));
     };
 
     const filteredTodos = todos.filter(todo => {
@@ -132,8 +126,7 @@ export default function Home() {
                     <TodoMarkAll
                         numCompletedTodos={completedCount}
                         numTodos={todos.length}
-                        onMarkAllActive={onMarkAllActive}
-                        onMarkAllCompleted={onMarkAllCompleted}
+                        onMarkAll={onMarkAll}
                     />
                     <TodoList
                         todos={filteredTodos}
